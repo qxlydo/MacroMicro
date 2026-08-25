@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/MegaByte_Finder/">
+    <file alias="Main.qml">C:/Users/Qxl/Documents/MegaByte_Finder/Main.qml</file>
+  </qresource>
+</RCC>
+

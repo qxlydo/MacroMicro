@@ -1,0 +1,6 @@
+module MegaByte_Finder
+typeinfo appMegaByte_Finder.qmltypes
+prefer :/qt/qml/MegaByte_Finder/
+Main 1.0 Main.qml
+depends QtQuick
+
