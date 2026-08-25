@@ -10,8 +10,6 @@ MMEngine::MMEngine(QObject* parent)
 {
     m_trayIcon = new QSystemTrayIcon(this);
 
-    // Задаем стандартную системную иконку (или вашу собственную),
-    // так как без иконки уведомления в Windows могут не показываться
     m_trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_DriveHDIcon));
     m_trayIcon->show();
 
@@ -24,7 +22,7 @@ void MMEngine::showNotification(const QString& title, const QString& message)
             title,
             message,
             QSystemTrayIcon::Information,
-            3000 // Длительность показа в мс
+            3000
             );
     }
 }
@@ -57,9 +55,6 @@ void MMEngine::setCurrentPath(const QString& path)
     }
 }
 
-// ============================================================
-// Поиск
-// ============================================================
 
 void MMEngine::scanDirectory(const QUrl& dirUrl)
 {
@@ -84,7 +79,6 @@ void MMEngine::scanDirectory(const QUrl& dirUrl)
         return;
     }
 
-    // Очистка и установка статуса происходят в GUI-потоке перед запуском
     MD.clear();
     updateFilesList();
 
@@ -95,7 +89,6 @@ void MMEngine::scanDirectory(const QUrl& dirUrl)
 
     emit scanStarted();
 
-    // Запуск фонового асинхронного сканирования
     QtConcurrent::run([this, p, dirPath]() {
         processScan(p, dirPath);
     });
@@ -115,13 +108,10 @@ void MMEngine::processScan(const path& p, const QString& dirPath)
         emit statusChanged();
         emit scanFinished();
 
-        // Показываем системное всплывающее уведомление
+
         showNotification("Сканирование завершено", message);
     });
 }
-// ============================================================
-// Диски
-// ============================================================
 
 void MMEngine::refreshDisks()
 {
@@ -133,9 +123,6 @@ void MMEngine::refreshDisks()
     emit statusChanged();
 }
 
-// ============================================================
-// Ручное добавление файла
-// ============================================================
 
 void MMEngine::addFile(const QString& name, qint64 size)
 {
@@ -143,9 +130,6 @@ void MMEngine::addFile(const QString& name, qint64 size)
     updateFilesList();
 }
 
-// ============================================================
-// Очистка
-// ============================================================
 
 void MMEngine::clearFiles()
 {
@@ -155,10 +139,6 @@ void MMEngine::clearFiles()
     m_status = "Список очищен";
     emit statusChanged();
 }
-
-// ============================================================
-// Конвертация данных для QML
-// ============================================================
 
 void MMEngine::updateFilesList()
 {
@@ -192,9 +172,6 @@ void MMEngine::updateDisksList()
     emit disksListChanged();
 }
 
-// ============================================================
-// Добавление MetaData
-// ============================================================
 
 void MMEngine::addToList(std::vector<MetaData>& md,
                          const QString& newNameFile,
@@ -203,9 +180,7 @@ void MMEngine::addToList(std::vector<MetaData>& md,
     md.emplace_back(newNameFile, newSizeFile);
 }
 
-// ============================================================
-// Сортировка по размеру
-// ============================================================
+
 
 void MMEngine::getData()
 {
@@ -218,9 +193,6 @@ void MMEngine::getData()
         );
 }
 
-// ============================================================
-// Получение доступных дисков Windows
-// ============================================================
 
 int MMEngine::getAvailableDisks()
 {
@@ -289,9 +261,7 @@ int MMEngine::getAvailableDisks()
     return static_cast<int>(listDisks.size());
 }
 
-// ============================================================
-// Проверка директории
-// ============================================================
+
 
 void MMEngine::YesOrNot(const path& dirPath)
 {
@@ -302,9 +272,6 @@ void MMEngine::YesOrNot(const path& dirPath)
     }
 }
 
-// ============================================================
-// Рекурсивный поиск файлов
-// ============================================================
 
 void MMEngine::IterForDir(const path& dirPath)
 {
@@ -340,11 +307,8 @@ void MMEngine::IterForDir(const path& dirPath)
 
                 const qint64 fileSize =
                     static_cast<qint64>(size);
-
-                // Храним реальный размер в байтах.
+                
                 addToList(MD, filePath, fileSize);
-
-                // Сообщаем QML сразу после нахождения файла.
                 emit fileFound(filePath, fileSize);
             }
         }
@@ -353,8 +317,7 @@ void MMEngine::IterForDir(const path& dirPath)
         it.increment(ec);
 
         if (ec) {
-            // Например, нет доступа к следующей директории.
-            // Просто продолжаем сканирование остальных файлов.
+
             ec.clear();
         }
     }
