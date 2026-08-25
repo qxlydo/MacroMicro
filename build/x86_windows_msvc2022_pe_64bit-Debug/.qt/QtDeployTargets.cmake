@@ -1,3 +1,0 @@
-set(__QT_DEPLOY_TARGET_appMegaByte_Finder_FILE C:/Users/Qxl/Documents/MegaByte_Finder/build/x86_windows_msvc2022_pe_64bit-Debug/appMegaByte_Finder.exe)
-set(__QT_DEPLOY_TARGET_appMegaByte_Finder_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_appMegaByte_Finder_RUNTIME_DLLS C:/Qt/6.10.2/msvc2022_64/bin/Qt6Quickd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Concurrentd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Widgetsd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6OpenGLd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlMetad.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlModelsd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlWorkerScriptd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Qmld.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Networkd.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Guid.dll;C:/Qt/6.10.2/msvc2022_64/bin/Qt6Cored.dll)
