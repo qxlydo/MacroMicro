@@ -20,7 +20,7 @@ using namespace std::filesystem;
 struct MetaData
 {
     QString nameFile;
-    qint64 sizeFile; // размер в байтах
+    qint64 sizeFile; 
 
     MetaData(const QString& name, qint64 size)
         : nameFile(name), sizeFile(size)
@@ -37,7 +37,6 @@ struct Disk
 class MMEngine : public QObject
 {
     Q_OBJECT
-
     Q_PROPERTY(QVariantList disksList READ disksList NOTIFY disksListChanged)
     Q_PROPERTY(QVariantList filesList READ filesList NOTIFY filesListChanged)
     Q_PROPERTY(QString currentPath READ currentPath WRITE setCurrentPath NOTIFY currentPathChanged)
@@ -52,17 +51,10 @@ public:
     QString status() const;
 
     void setCurrentPath(const QString& path);
-
-    // Вызывается кнопкой "Начать поиск".
-    // QML передаёт URL, который возвращает FolderDialog.
     Q_INVOKABLE void scanDirectory(const QUrl& dirUrl);
-
     Q_INVOKABLE void refreshDisks();
-
     Q_INVOKABLE void addFile(const QString& name, qint64 size);
-
     Q_INVOKABLE void clearFiles();
-
     Q_INVOKABLE void showNotification(const QString& title, const QString& message);
 
 signals:
@@ -74,9 +66,6 @@ signals:
     void scanStarted();
     void scanFinished();
     void error(const QString& msg);
-
-    // Отправляется в QML для каждой найденной директории.
-    // size — размер файла в байтах.
     void fileFound(const QString& path, qint64 size);
 
 private:
