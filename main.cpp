@@ -1,13 +1,13 @@
 // "qrc:/qt/qml/MegaByte_Finder/Main.qml"
 
-#include <QApplication> // <-- Заменено для работы QSystemTrayIcon
+#include <QApplication> 
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "MegaByteFinder.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv); // <-- QApplication вместо QGuiApplication
+    QApplication app(argc, argv); 
     QQmlApplicationEngine engine;
 
     MMEngine mmEngine;
