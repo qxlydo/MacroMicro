@@ -7,6 +7,7 @@
 #include <vector>
 #include <windows.h>
 
+#include <QIcon>
 #include <QObject>
 #include <QVariantList>
 #include <QVariantMap>
@@ -15,17 +16,19 @@
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
 #include <QSystemTrayIcon>
+
 using namespace std::filesystem;
 
 struct MetaData
 {
     QString nameFile;
-    qint64 sizeFile; 
+    qint64 sizeFile;
 
     MetaData(const QString& name, qint64 size)
         : nameFile(name), sizeFile(size)
     {
     }
+
 };
 
 struct Disk
@@ -51,6 +54,7 @@ public:
     QString status() const;
 
     void setCurrentPath(const QString& path);
+
     Q_INVOKABLE void scanDirectory(const QUrl& dirUrl);
     Q_INVOKABLE void refreshDisks();
     Q_INVOKABLE void addFile(const QString& name, qint64 size);
@@ -66,6 +70,7 @@ signals:
     void scanStarted();
     void scanFinished();
     void error(const QString& msg);
+
     void fileFound(const QString& path, qint64 size);
 
 private:
@@ -94,6 +99,7 @@ private:
     QString m_status;
 
     QSystemTrayIcon* m_trayIcon;
+
 };
 
 #endif

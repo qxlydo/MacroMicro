@@ -4,16 +4,27 @@
 #include <QStyle>
 #include <algorithm>
 #include <system_error>
+#include <QIcon>
+
 
 MMEngine::MMEngine(QObject* parent)
     : QObject(parent)
 {
     m_trayIcon = new QSystemTrayIcon(this);
 
-    m_trayIcon->setIcon(QApplication::style()->standardIcon(QStyle::SP_DriveHDIcon));
+        QIcon icon(":/resources/free-icon.ico");
+
+    qDebug() << "Icon isNull:" << icon.isNull();
+
+    m_trayIcon->setIcon(icon);
+
     m_trayIcon->show();
 
+    qDebug() << "Tray available:"
+             << QSystemTrayIcon::isSystemTrayAvailable();
+
 }
+
 
 void MMEngine::showNotification(const QString& title, const QString& message)
 {
