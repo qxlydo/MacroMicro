@@ -43,3 +43,10 @@ cd MacroMicro
 # Конфигурация и сборка через CMake
 cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
+```
+
+## Credits
+
+Application icon by [Aficons studio](https://www.flaticon.com/authors/aficons-studio) from [Flaticon](https://www.flaticon.com/).
+
+[Search file icon](https://www.flaticon.com/ru/free-icon/search-file_16700618)
